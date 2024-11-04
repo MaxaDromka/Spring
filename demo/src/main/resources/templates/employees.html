@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,32 +109,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>Иванов Иван Иванович</td>
-      <td>Охранник</td>
-      <td>2022-01-15</td>
-      <td>40000 руб.</td>
-      <td>Среднее специальное</td>
-      <td><img src="/static/image/foto1.jpg" alt="Фото Иванова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
-      <td>Улица Ленина, д.1</td>
-    </tr>
-    <tr>
-      <td>Петров Петр Петрович</td>
-      <td>Менеджер по безопасности</td>
-      <td>2021-06-10</td>
-      <td>60000 руб.</td>
-      <td>Высшее образование</td>
-      <td><img src="/static/image/foto1.jpg" alt="Фото Петрова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
-      <td>Улица Пушкина, д.2</td>
-    </tr>
-    <tr>
-      <td>Сидоров Сидор Сидорович</td>
-      <td>Технический специалист</td>
-      <td>2023-03-05</td>
-      <td>50000 руб.</td>
-      <td>Высшее образование</td>
-      <td><img src="/static/image/foto1.jpg" alt="Фото Сидорова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
-      <td>Улица Гоголя, д.3</td>
+    <tr th:each="employee : ${employees}">
+      <td th:text="${employee.id}"></td>
+      <td th:text="${employee.full_name}"></td>
+      <td th:text="${employee.position}"></td>
+      <td th:text="${#dates.format(employee.hire_date, 'dd.MM.yyyy')}"></td> <!-- Форматирование даты -->
+      <td th:text="${employee.salary}"></td>
+      <td th:text="${employee.edication}"></td>
+      <td>
+        <img th:if="${employee.photo != null}" th:src="@{${employee.photo}}" alt="Фото" style="width: 50px; height: auto;" />
+        <span th:if="${employee.photo == null}">Нет фото</span>
+      </td>
     </tr>
     </tbody>
   </table>

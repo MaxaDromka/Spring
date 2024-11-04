@@ -1,14 +1,27 @@
 package com.Security_Agency.demo;
 
+import Service.EmployeesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 public class MainController {
 
+    private  EmployeesService employeesService;
+
+    @Autowired
+    public MainController(EmployeesService employeesService) {
+        this.employeesService = employeesService;
+    }
+
     @GetMapping("/employees")
     public String employees(Model model) {
+        List<Employees> employeeList = employeesService.getAllEmployees();
+        model.addAttribute("employees", employeeList);
         return "employees";
     }
     @GetMapping("/revenue")
