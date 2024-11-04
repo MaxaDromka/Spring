@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d6b9f;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            border-radius: 5px;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .table td, .table th {
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .table th {
+            color: #ffffff;
+            background: #2d6b9f;
+        }
+
+        .table tr:nth-child(even) {
+            background: #F8F8F8;
+        }
+
+        button {
+            background-color: #2d6b9f;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #337AB7;
+        }
+
+        @media (max-width: 767px) {
+            button {
+                width: auto;
+                height: auto;
+                padding: 10px;
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/employees" method="post">
+    <h2>Клиенты</h2>
+    <button type="submit">Добавить клиента</button>
+    <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Номер телефона</th>
+            <th>Адрес охраняемого объекта</th>
+            <th>Серийный номер договора</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+            <td>+7 (999) 123-45-67</td>
+            <td>Улица Ленина, д.1</td>
+            <td>123456789</td>
+        </tr>
+        <tr>
+            <td>Петров Петр Петрович</td>
+            <td>+7 (999) 234-56-78</td>
+            <td>Улица Пушкина, д.2</td>
+            <td>987654321</td>
+        </tr>
+        <tr>
+            <td>Сидоров Сидор Сидорович</td>
+            <td>+7 (999) 345-67-89</td>
+            <td>Улица Гоголя, д.3</td>
+            <td>456789123</td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

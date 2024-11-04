@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d6b9f;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            border-radius: 5px;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .table td, .table th {
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .table th {
+            color: #ffffff;
+            background: #2d6b9f;
+        }
+
+        .table tr:nth-child(even) {
+            background: #F8F8F8;
+        }
+
+        button {
+            background-color: #2d6b9f;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #337AB7;
+        }
+
+        @media (max-width: 767px) {
+            button {
+                width: auto;
+                height: auto;
+                padding: 10px;
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/services" method="post">
+    <h2>Услуги</h2>
+    <button type="submit">Добавить услугу</button>
+    <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название услуги</th>
+            <th>Описание услуги</th>
+            <th>Цена услуги</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Охрана</td>
+            <td>Предоставление услуг охраны объектов и мероприятий.</td>
+            <td>50000 руб.</td>
+        </tr>
+        <tr>
+            <td>Уборка</td>
+            <td>Профессиональная уборка помещений и территорий.</td>
+            <td>20000 руб.</td>
+        </tr>
+        <tr>
+            <td>Консультирование</td>
+            <td>Консультационные услуги по безопасности и охране.</td>
+            <td>30000 руб.</td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

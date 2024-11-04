@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сотрудники</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2d6b9f;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        border-radius: 5px;
+        border-collapse: collapse;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+    }
+
+    .table td, .table th {
+        text-align: center;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .table th {
+        color: #ffffff;
+        background: #2d6b9f;
+    }
+
+    .table tr:nth-child(even) {
+        background: #F8F8F8;
+    }
+
+    button {
+        background-color: #2d6b9f;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        font-size: 14px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    button:hover {
+        background-color: #337AB7;
+    }
+
+    @media (max-width: 767px) {
+        button {
+            width: auto;
+            height: auto;
+            padding: 10px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+    }
+
+    /* Стиль для полноэкранного изображения */
+    .fullscreen-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .fullscreen-img img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+  </style>
+</head>
+<body>
+<form action="/employees" method="post">
+  <h2>Сотрудники</h2>
+  <button type="submit">Добавить сотрудника</button>
+  <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ФИО</th>
+      <th>Должность</th>
+      <th>Дата поступления на работу</th>
+      <th>Зарплата</th>
+      <th>Образование</th>
+      <th>Фото</th>
+      <th>Адрес охраняемого объекта</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Иванов Иван Иванович</td>
+      <td>Охранник</td>
+      <td>2022-01-15</td>
+      <td>40000 руб.</td>
+      <td>Среднее специальное</td>
+      <td><img src="/static/image/foto1.jpg" alt="Фото Иванова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
+      <td>Улица Ленина, д.1</td>
+    </tr>
+    <tr>
+      <td>Петров Петр Петрович</td>
+      <td>Менеджер по безопасности</td>
+      <td>2021-06-10</td>
+      <td>60000 руб.</td>
+      <td>Высшее образование</td>
+      <td><img src="/static/image/foto1.jpg" alt="Фото Петрова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
+      <td>Улица Пушкина, д.2</td>
+    </tr>
+    <tr>
+      <td>Сидоров Сидор Сидорович</td>
+      <td>Технический специалист</td>
+      <td>2023-03-05</td>
+      <td>50000 руб.</td>
+      <td>Высшее образование</td>
+      <td><img src="/static/image/foto1.jpg" alt="Фото Сидорова" style="width:50px; height:auto;" onclick="toggleFullScreen(this);"></td>
+      <td>Улица Гоголя, д.3</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="fullscreen-img" id="fullscreenImg" onclick="closeFullScreen()">
+    <img id="fullImg" src="" alt="">
+  </div>
+  <script>
+    function toggleFullScreen(img) {
+       const fullImg = document.getElementById('fullImg');
+       const fullscreenDiv = document.getElementById('fullscreenImg');
+
+       if (fullscreenDiv.style.display === "flex") {
+           fullscreenDiv.style.display = "none";
+       } else {
+           fullImg.src = img.src;
+           fullscreenDiv.style.display = "flex";
+       }
+    }
+    function closeFullScreen() {
+       const fullscreenDiv = document.getElementById('fullscreenImg');
+       fullscreenDiv.style.display = "none";
+    }
+  </script>
+</form>
+</body>
+</html>
