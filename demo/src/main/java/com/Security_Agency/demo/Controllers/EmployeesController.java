@@ -1,8 +1,9 @@
-package Controllers;
+package com.Security_Agency.demo.Controllers;
 
-import Service.EmployeesService;
+import com.Security_Agency.demo.Service.EmployeesService;
 import com.Security_Agency.demo.Employees;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/employees")
+//@RequestMapping("/employees")
 public class EmployeesController {
     @Autowired
     private EmployeesService employeesService;
@@ -25,6 +26,7 @@ public class EmployeesController {
     public List<Employees> getAllEmployees() {
         return employeesService.getAllEmployees();
     }
+
 
     // Get user by ID
     @GetMapping("/{id}")

@@ -1,6 +1,6 @@
-package Service;
+package com.Security_Agency.demo.Service;
 
-import Repo.EmpRepo;
+import com.Security_Agency.demo.Repo.EmpRepo;
 import com.Security_Agency.demo.Employees;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class EmployeesService {
             existingEmp.setPosition(empDetails.getPosition());
             existingEmp.setHire_date(empDetails.getHire_date());
             existingEmp.setSalary(empDetails.getSalary());
-            existingEmp.setEdication(empDetails.getEdication());
+            existingEmp.setEducation(empDetails.getEducation());
             return empRepo.save(existingEmp);
         }
         return null;

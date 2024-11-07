@@ -54,12 +54,12 @@ public class Employees {
         this.salary = salary;
     }
 
-    public String getEdication() {
-        return edication;
+    public String getEducation() {
+        return education;
     }
 
-    public void setEdication(String edication) {
-        this.edication = edication;
+    public void setEducation(String edication) {
+        this.education = edication;
     }
 
     public byte[] getPhoto() {
@@ -70,20 +70,24 @@ public class Employees {
         this.photo = photo;
     }
 
-    public Employees(int id, String full_name, String position, Date hire_date, int salary, String edication, byte[] photo) {
+    public Employees(int id, String full_name, String position, Date hire_date, int salary, String education, byte[] photo) {
         this.id = id;
         this.full_name = full_name;
         this.position = position;
         this.hire_date = hire_date;
         this.salary = salary;
-        this.edication = edication;
+        this.education = education;
         this.photo = photo;
+    }
+
+    // Default constructor
+    public Employees() {
     }
 
     private Date hire_date;
     private int salary;
 
-    private String edication;
+    private String education;
 
     private  byte[] photo;
 }
