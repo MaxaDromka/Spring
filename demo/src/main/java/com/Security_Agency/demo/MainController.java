@@ -1,5 +1,6 @@
 package com.Security_Agency.demo;
 
+import com.Security_Agency.demo.Service.AmenitiesService;
 import com.Security_Agency.demo.Service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,12 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    private final  EmployeesService employeesService;
+    private final EmployeesService employeesService;
+    private final AmenitiesService amenitiesService;
     @Autowired
-    public MainController(EmployeesService employeesService) {
+    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService) {
         this.employeesService = employeesService;
+        this.amenitiesService = amenitiesService;
     }
 
 
@@ -35,6 +38,8 @@ public class MainController {
     }
     @GetMapping("/services")
     public String services(Model model) {
+        List<Amenities> amenitiesList = amenitiesService.getAllAmenities();
+        model.addAttribute("services", amenitiesList);
         return "services";
     }
     @GetMapping("/customers")

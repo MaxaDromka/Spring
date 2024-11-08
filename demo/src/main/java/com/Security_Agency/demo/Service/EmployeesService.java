@@ -13,7 +13,7 @@ public class EmployeesService {
     @Autowired
     private EmpRepo empRepo;
 
-    public Employees createUser(Employees employees){
+    public Employees createEmployees(Employees employees){
         return empRepo.save(employees);
     }
 
