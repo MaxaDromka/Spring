@@ -10,6 +10,9 @@ public class Amenities {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public Amenities() {
+    }
+
     @Column(name = "service_name", nullable = false, unique = true, length = 100)
     private String serviceName;
 

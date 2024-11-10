@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,45 +74,22 @@
 <body>
 
 <form action="/secured_objects" method="post">
-    <h2>Охраняемые объекты</h2>
-    <button type="submit">Добавить объект безопасности</button>
+    <h2>Объекты под охраной</h2>
+    <button type="submit">Добавить объект</button>
     <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
     <table class="table">
         <thead>
         <tr>
             <th>Адрес объекта</th>
-            <th>Имя заказчика</th>
+            <th>Имя клиента</th>
             <th>Тип услуги</th>
-            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Улица Ленина, д.1</td>
-            <td>Иван Иванов</td>
-            <td>Охрана</td>
-            <td>
-                <button type="button" onclick="editObject(1)">Редактировать</button>
-                <button type="button" onclick="deleteObject(1)">Удалить</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Улица Пушкина, д.2</td>
-            <td>Петр Петров</td>
-            <td>Охрана</td>
-            <td>
-                <button type="button" onclick="editObject(2)">Редактировать</button>
-                <button type="button" onclick="deleteObject(2)">Удалить</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Улица Гоголя, д.3</td>
-            <td>Сергей Сергеев</td>
-            <td>Охрана</td>
-            <td>
-                <button type="button" onclick="editObject(3)">Редактировать</button>
-                <button type="button" onclick="deleteObject(3)">Удалить</button>
-            </td>
+        <tr th:each="secured_object : ${secured_objects}">
+            <td th:text="${secured_object.objectAddress}"></td>
+            <td th:text="${secured_object.clientName}"></td>
+            <td th:text="${secured_object.serviceType}"></td>
         </tr>
         </tbody>
     </table>

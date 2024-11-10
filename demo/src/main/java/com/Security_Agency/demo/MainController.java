@@ -1,7 +1,9 @@
 package com.Security_Agency.demo;
 
 import com.Security_Agency.demo.Service.AmenitiesService;
+import com.Security_Agency.demo.Service.ContractsService;
 import com.Security_Agency.demo.Service.EmployeesService;
+import com.Security_Agency.demo.Service.SecuredObjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,15 @@ public class MainController {
 
     private final EmployeesService employeesService;
     private final AmenitiesService amenitiesService;
+    private final ContractsService contractsService;
+
+    private final SecuredObjectsService securedObjectsService;
     @Autowired
-    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService) {
+    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, SecuredObjectsService securedObjectsService) {
         this.employeesService = employeesService;
         this.amenitiesService = amenitiesService;
+        this.contractsService = contractsService;
+        this.securedObjectsService = securedObjectsService;
     }
 
 
@@ -34,6 +41,8 @@ public class MainController {
 
     @GetMapping("/contracts")
     public String contracts(Model model) {
+        List<Contracts> amenitiesList = contractsService.getAllContracts();
+        model.addAttribute("contracts", amenitiesList);
         return "contracts";
     }
     @GetMapping("/services")
@@ -48,6 +57,8 @@ public class MainController {
     }
     @GetMapping("/secured_objects")
     public String secured_objects(Model model) {
+        List<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
+        model.addAttribute("secured_objects", securedObjectsList);
         return "secured_objects";
     }
 }

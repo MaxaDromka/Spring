@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,42 +74,28 @@
 <body>
 
 <form action="/contracts" method="post">
-    <h2>Договоры</h2>
-    <button type="submit">Добавить договор</button>
+    <h2>Контракты</h2>
+    <button type="submit">Добавить контракт</button>
     <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
     <table class="table">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Сумма</th>
-            <th>Дата завершения договора</th>
-            <th>Дата заключения договора</th>
+            <th>Дата начала контракта</th>
+            <th>Дата окончания контракта</th>
             <th>Серийный номер контракта</th>
-            <th>Вид услуги</th>
-            <th>Действия</th>
+            <th>Тип услуги</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>100000 руб.</td>
-            <td>2024-12-31</td>
-            <td>2024-01-01</td>
-            <td>123456789</td>
-            <td>Охрана</td>
-            <td>
-                <button type="button" onclick="editContract(1)">Редактировать</button>
-                <button type="button" onclick="deleteContract(1)">Удалить</button>
-            </td>
-        </tr>
-        <tr>
-            <td>200000 руб.</td>
-            <td>2025-01-15</td>
-            <td>2024-02-01</td>
-            <td>987654321</td>
-            <td>Охрана</td>
-            <td>
-                <button type="button" onclick="editContract(2)">Редактировать</button>
-                <button type="button" onclick="deleteContract(2)">Удалить</button>
-            </td>
+        <tr th:each="contract : ${contracts}">
+            <td th:text="${contract.id}"></td>
+            <td th:text="${#numbers.formatDecimal(contract.amount, 2, 2)}"></td>
+            <td th:text="${#dates.format(contract.contractStartDate, 'dd.MM.yyyy')}"></td>
+            <td th:text="${#dates.format(contract.contractEndDate, 'dd.MM.yyyy')}"></td>
+            <td th:text="${contract.contractSerialNumber}"></td>
+            <td th:text="${contract.serviceType}"></td>
         </tr>
         </tbody>
     </table>
