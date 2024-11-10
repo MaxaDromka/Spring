@@ -3,25 +3,32 @@ package com.Security_Agency.demo.Controllers;
 import com.Security_Agency.demo.Employees;
 import com.Security_Agency.demo.Service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/api/employees")
 public class EmployeesController {
     @Autowired
     private EmployeesService employeesService;
 
     @PostMapping("/create")
-    public Employees create(@RequestBody Employees employees) {
-        return employeesService.createEmployees(employees);
+    public String create(@ModelAttribute Employees employees, @RequestParam("photo") MultipartFile photo) throws IOException {
+        employeesService.createEmployees(employees, photo);
+        return "redirect:/employees";
     }
 
     @GetMapping
-    public List<Employees> getAllEmployees() {
-        return employeesService.getAllEmployees();
+    public String getAllEmployees(Model model) {
+        List<Employees> employeesList = employeesService.getAllEmployees();
+        model.addAttribute("employees", employeesList);
+        return "employees";
     }
 
 

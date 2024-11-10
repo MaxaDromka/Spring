@@ -4,6 +4,9 @@ import com.Security_Agency.demo.Repo.EmpRepo;
 import com.Security_Agency.demo.Employees;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
 
@@ -13,7 +16,10 @@ public class EmployeesService {
     @Autowired
     private EmpRepo empRepo;
 
-    public Employees createEmployees(Employees employees){
+    public Employees createEmployees(Employees employees, MultipartFile photo) throws IOException {
+        if (!photo.isEmpty()) {
+            employees.setPhoto(photo.getBytes()); // Convert image to byte array
+        }
         return empRepo.save(employees);
     }
 
@@ -25,7 +31,6 @@ public class EmployeesService {
         return  empRepo.findById(id);
     }
 
-    // Update
     public Employees updateEmp(Long id, Employees empDetails) {
         Optional<Employees> employees = empRepo.findById(id);
         if (employees.isPresent()) {
@@ -40,12 +45,10 @@ public class EmployeesService {
         return null;
     }
 
-    // Delete all users
     public void deleteAllEmp() {
         empRepo.deleteAll();
     }
 
-    // Delete user
     public void deleteEmp(Long id) {
         empRepo.deleteById(id);
     }
