@@ -18,7 +18,7 @@ public class EmployeesService {
 
     public Employees createEmployees(Employees employees, MultipartFile photo) throws IOException {
         if (!photo.isEmpty()) {
-            employees.setPhoto(photo.getBytes()); // Convert image to byte array
+            employees.setPhoto(photo.getBytes());
         }
         return empRepo.save(employees);
     }

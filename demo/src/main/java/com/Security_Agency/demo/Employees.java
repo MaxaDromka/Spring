@@ -1,6 +1,8 @@
 package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -80,14 +82,14 @@ public class Employees {
         this.photo = photo;
     }
 
-    // Default constructor
     public Employees() {
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hire_date;
     private int salary;
 
     private String education;
-
+    @NotNull
     private  byte[] photo;
 }

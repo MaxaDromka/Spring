@@ -27,7 +27,10 @@ public class MainController {
         this.securedObjectsService = securedObjectsService;
     }
 
-
+    @GetMapping("/")
+    public String fun() {
+        return "index";
+    }
     @GetMapping("/employees")
     public String employees(Model model) {
         List<Employees> employeeList = employeesService.getAllEmployees();

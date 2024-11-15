@@ -21,8 +21,9 @@ public class EmployeesController {
     @PostMapping("/create")
     public String create(@ModelAttribute Employees employees, @RequestParam("photo") MultipartFile photo) throws IOException {
         employeesService.createEmployees(employees, photo);
-        return "redirect:/employees";
+        return "redirect:/api/employees";
     }
+
 
     @GetMapping
     public String getAllEmployees(Model model) {
