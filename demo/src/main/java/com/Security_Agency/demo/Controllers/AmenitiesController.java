@@ -54,7 +54,7 @@ public class AmenitiesController {
         @GetMapping("/services/delete/{id}")
         public String deleteAmenity(Model model,@PathVariable("id") Long id) {
                 amenitiesService.deleteAmenity(id);
-                return "services"; // Перенаправление на страницу услуг после удаления
+                return "/services"; // Перенаправление на страницу услуг после удаления
         }
 
         /*@DeleteMapping("/{id}")
