@@ -50,7 +50,7 @@ public class MainController {
     }
     @GetMapping("/services")
     public String services(Model model) {
-        List<Amenities> amenitiesList = amenitiesService.getAllAmenities();
+        Iterable<Amenities> amenitiesList = amenitiesService.getAllAmenities();
         model.addAttribute("services", amenitiesList);
         return "services";
     }
@@ -60,7 +60,7 @@ public class MainController {
     }
     @GetMapping("/secured_objects")
     public String secured_objects(Model model) {
-        List<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
+        Iterable<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
         model.addAttribute("secured_objects", securedObjectsList);
         return "secured_objects";
     }

@@ -18,7 +18,7 @@ public class SecuredObjectsService {
         return securedObjectsRepo.save(securedObject);
     }
 
-    public List<SecuredObjects> getAllSecuredObjects() {
+    public Iterable<SecuredObjects> getAllSecuredObjects() {
         return securedObjectsRepo.findAll();
     }
 

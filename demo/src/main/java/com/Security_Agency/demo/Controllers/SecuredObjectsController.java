@@ -18,7 +18,7 @@ public class SecuredObjectsController {
 
     @GetMapping
     public String getAllSecuredObjects(Model model) {
-        List<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
+        Iterable<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
         model.addAttribute("secured_objects", securedObjectsList);
         return "secured_objects";
     }

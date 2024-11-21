@@ -19,7 +19,7 @@ public class AmenitiesService {
     }
 
 
-    public List<Amenities> getAllAmenities() {
+    public Iterable<Amenities> getAllAmenities() {
         return serRepo.findAll();
     }
 

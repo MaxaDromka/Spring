@@ -72,52 +72,44 @@
     </style>
 </head>
 <body>
-<form action="/services" method="post">
-    <h2>Услуги</h2>
-    <form action="/api/employees/create" method="post" enctype="multipart/form-data">
-        <h2>Добавить нового сотрудника</h2>
-        <div class="form-group">
-            <label for="full_name">ФИО:</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" required>
-        </div>
-        <div class="form-group">
-            <label for="position">Должность:</label>
-            <input type="text" class="form-control" id="position" name="position" required>
-        </div>
-        <div class="form-group">
-            <label for="hire_date">Дата найма:</label>
-            <input type="date" class="form-control" id="hire_date" name="hire_date" required>
-        </div>
-        <div class="form-group">
-            <label for="salary">Зарплата:</label>
-            <input type="number" class="form-control" id="salary" name="salary" required>
-        </div>
-        <div class="form-group">
-            <label for="education">Образование:</label>
-            <input type="text" class="form-control" id="education" name="education" required>
-        </div>
-        <div class="form-group">
-            <label for="photo">Фото:</label>
-            <input type="file" class="form-control-file" id="photo" name="photo">
-        </div>
-    </form>
-    <button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Название услуги</th>
-            <th>Описание услуги</th>
-            <th>Цена услуги</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="amenity : ${services}">
-            <td th:text="${amenity.serviceName}"></td>
-            <td th:text="${amenity.serviceDescription}"></td>
-            <td th:text="${#numbers.formatDecimal(amenity.servicePrice, 2, 2)}"></td>
-        </tr>
-        </tbody>
-    </table>
+
+<h2>Услуги</h2>
+
+<!-- Форма для добавления новой услуги -->
+<form action="/api/services/create" method="post">
+    <div class="form-group">
+        <label for="serviceName">Название услуги:</label>
+        <input type="text" class="form-control" id="serviceName" name="serviceName" required>
+    </div>
+    <div class="form-group">
+        <label for="serviceDescription">Описание услуги:</label>
+        <input type="text" class="form-control" id="serviceDescription" name="serviceDescription" required>
+    </div>
+    <div class="form-group">
+        <label for="servicePrice">Цена услуги:</label>
+        <input type="number" class="form-control" id="servicePrice" name="servicePrice" required step="0.01">
+    </div>
+    <button type="submit">Добавить услугу</button>
 </form>
+
+<button type="button" onclick="window.location.href='index.html'">Вернуться на главную страницу</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Название услуги</th>
+        <th>Описание услуги</th>
+        <th>Цена услуги</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="amenity : ${services}">
+        <td th:text="${amenity.serviceName}"></td>
+        <td th:text="${amenity.serviceDescription}"></td>
+        <td th:text="${#numbers.formatDecimal(amenity.servicePrice, 2, 2)}"></td>
+        <td><a class="btn btn-danger" th:href="@{/api/services/services/delete/{id}(id=${amenity.id})}">Удалить</a></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
