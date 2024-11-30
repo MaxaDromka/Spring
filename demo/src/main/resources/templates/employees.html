@@ -29,14 +29,10 @@
       <label for="education">Образование:</label>
       <input type="text" class="form-control" id="education" name="education" required>
     </div>
-    <div class="form-group">
-      <label for="photo">Фото:</label>
-      <input type="file" class="form-control-file" id="photo" name="photo">
-    </div>
+
     <button type="submit" class="btn btn-primary">Добавить сотрудника</button>
   </form>
 
-  <!-- Existing employee list -->
   <table class="table mt-4">
     <thead>
     <tr>
@@ -46,7 +42,9 @@
       <th>Дата найма</th>
       <th>Зарплата</th>
       <th>Образование</th>
-      <th>Фото</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -57,10 +55,10 @@
       <td th:text="${#dates.format(employee.hire_date, 'dd.MM.yyyy')}"></td>
       <td th:text="${employee.salary}"></td>
       <td th:text="${employee.education}"></td>
-      <td>
-        <img th:if="${employee.photo != null}" th:src="@{${employee.photo}}" alt="Фото" style="width: 50px; height: auto;" />
-        <span th:if="${employee.photo == null}">Нет фото</span>
-      </td>
+      <td><a class="btn btn-secondary" th:href="@{/api/employees/{id}(id=${employee.id})}">Детали</a></td>
+      <td><a class="btn btn-secondary" th:href="@{/api/employees/edit/{id}(id=${employee.id})}">Редактировать</a></td>
+      <td><a class="btn btn-danger" th:href="@{/api/employees/delete/{id}(id=${employee.id})}"
+             onclick="return confirm('Вы уверены, что хотите удалить?');">Удалить</a></td>
     </tr>
     </tbody>
   </table>

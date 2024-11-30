@@ -16,10 +16,7 @@ public class EmployeesService {
     @Autowired
     private EmpRepo empRepo;
 
-    public Employees createEmployees(Employees employees, MultipartFile photo) throws IOException {
-        if (!photo.isEmpty()) {
-            employees.setPhoto(photo.getBytes());
-        }
+    public Employees createEmployees(Employees employees) throws IOException {
         return empRepo.save(employees);
     }
 

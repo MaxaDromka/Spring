@@ -1,12 +1,12 @@
 package com.Security_Agency.demo.Controllers;
 
 import com.Security_Agency.demo.Employees;
+import com.Security_Agency.demo.Repo.EmpRepo;
 import com.Security_Agency.demo.Service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,9 +18,16 @@ public class EmployeesController {
     @Autowired
     private EmployeesService employeesService;
 
+    private final EmpRepo empRepo;
+
+    public EmployeesController(EmployeesService employeesService, EmpRepo empRepo) {
+        this.employeesService = employeesService;
+        this.empRepo = empRepo;
+    }
+
     @PostMapping("/create")
-    public String create(@ModelAttribute Employees employees, @RequestParam("photo") MultipartFile photo) throws IOException {
-        employeesService.createEmployees(employees, photo);
+    public String create(@ModelAttribute Employees employees) throws IOException {
+        employeesService.createEmployees(employees);
         return "redirect:/api/employees";
     }
 
@@ -33,27 +40,44 @@ public class EmployeesController {
     }
 
 
-    @GetMapping("/{id}")
-    public Optional<Employees> getEmployeesById(@PathVariable Long id) {
-        return employeesService.getEmployeesById(id);
-    }
-
-
-    @PutMapping("/{id}")
-    public Employees updateEmployees(@PathVariable Long id, @RequestBody Employees empDetails) {
-        return employeesService.updateEmp(id, empDetails);
-    }
-
-
-    @DeleteMapping
-    public String deleteAllEmployees() {
-        employeesService.deleteAllEmp();
-        return "All employees have been deleted successfully.";
-    }
-
-
     @DeleteMapping("/{id}")
     public void deleteEmployees(@PathVariable Long id) {
         employeesService.deleteEmp(id);
+    }
+
+    @GetMapping("/{id}")
+    public String getEmployeeDetails(Model model, @PathVariable("id") Long id) {
+        Optional<Employees> employee = employeesService.getEmployeesById(id);
+        if (employee.isPresent()) {
+            model.addAttribute("employees", employee.get());
+            return "detailsEmp";
+        }
+        return "redirect:/api/employees";
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable("id") Long id) {
+        if (empRepo.existsById(id)) {
+            empRepo.deleteById(id);
+        }
+        return "redirect:/api/employees";
+    }
+
+
+    @GetMapping("/edit/{id}")
+    public String editStudentForm(@PathVariable("id") Long id, Model model) {
+        Optional<Employees> employee = empRepo.findById(id);
+
+        if (employee.isPresent()) {
+            model.addAttribute("employees", employee.get());
+            return "edit_Emp";
+        } else {
+            return "redirect:/api/employees";
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateEmployee(@PathVariable("id") Long id, @ModelAttribute Employees employeeDetails) {
+        Employees updatedEmployee = employeesService.updateEmp(id, employeeDetails);
+        return "redirect:/api/employees";
     }
 }

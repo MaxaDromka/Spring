@@ -64,22 +64,13 @@ public class Employees {
         this.education = edication;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public Employees(int id, String full_name, String position, Date hire_date, int salary, String education, byte[] photo) {
+    public Employees(int id, String full_name, String position, Date hire_date, int salary, String education) {
         this.id = id;
         this.full_name = full_name;
         this.position = position;
         this.hire_date = hire_date;
         this.salary = salary;
         this.education = education;
-        this.photo = photo;
     }
 
     public Employees() {
@@ -90,6 +81,4 @@ public class Employees {
     private int salary;
 
     private String education;
-    @NotNull
-    private  byte[] photo;
 }
