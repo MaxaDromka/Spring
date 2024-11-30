@@ -2,37 +2,58 @@ package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "secured_objects")
 public class SecuredObjects {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
 
     @Column(name = "object_address", nullable = false)
     private String objectAddress;
 
+
     @Column(name = "client_name", nullable = false)
     private String clientName;
 
-    @Column(name = "service_type", nullable = false)
-    private String serviceType;
+    /*public Amenities getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(Amenities amenities) {
+        this.amenities = amenities;
+    }*/
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    @Column(name = "service_type", nullable = false) // Убедитесь, что это поле правильно настроено
+    private String serviceType; // Измените тип на String
+
+    // Конструкторы, геттеры и сеттеры
 
     public SecuredObjects() {
     }
 
-    public SecuredObjects(int id, String objectAddress, String clientName, String serviceType) {
+    public SecuredObjects(Long id, String objectAddress, String clientName) {
         this.id = id;
         this.objectAddress = objectAddress;
         this.clientName = clientName;
-        this.serviceType = serviceType;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +73,5 @@ public class SecuredObjects {
         this.clientName = clientName;
     }
 
-    public String getServiceType() {
-        return serviceType;
-    }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
 }
