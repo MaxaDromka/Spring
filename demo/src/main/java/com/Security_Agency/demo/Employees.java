@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -81,4 +82,15 @@ public class Employees {
     private int salary;
 
     private String education;
+
+    @OneToMany(mappedBy = "employees", cascade = CascadeType.ALL) // Исправлено здесь
+    private List<SecuredObjects> securedObject;
+
+    public List<SecuredObjects> getSecuredObject() {
+        return securedObject;
+    }
+
+    public void setSecuredObject(List<SecuredObjects> securedObject) {
+        this.securedObject = securedObject;
+    }
 }

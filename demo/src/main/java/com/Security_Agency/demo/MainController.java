@@ -1,9 +1,6 @@
 package com.Security_Agency.demo;
 
-import com.Security_Agency.demo.Service.AmenitiesService;
-import com.Security_Agency.demo.Service.ContractsService;
-import com.Security_Agency.demo.Service.EmployeesService;
-import com.Security_Agency.demo.Service.SecuredObjectsService;
+import com.Security_Agency.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +14,15 @@ public class MainController {
     private final EmployeesService employeesService;
     private final AmenitiesService amenitiesService;
     private final ContractsService contractsService;
+    private final ClientSrvice clientSrvice;
 
     private final SecuredObjectsService securedObjectsService;
     @Autowired
-    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, SecuredObjectsService securedObjectsService) {
+    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, ClientSrvice clientSrvice, SecuredObjectsService securedObjectsService) {
         this.employeesService = employeesService;
         this.amenitiesService = amenitiesService;
         this.contractsService = contractsService;
+        this.clientSrvice = clientSrvice;
         this.securedObjectsService = securedObjectsService;
     }
 
@@ -60,10 +59,16 @@ public class MainController {
     }
     @GetMapping("/secured_objects")
     public String secured_objects(Model model) {
+
         Iterable<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
         Iterable<Amenities> amenities = amenitiesService.getAllAmenities();
+        Iterable<Client> clients = clientSrvice.getAllClient();
+        Iterable<Employees> employees = employeesService.getAllEmployees();
+
         model.addAttribute("secured_objects", securedObjectsList);
         model.addAttribute("services",amenities );
+        model.addAttribute("clients",clients );
+        model.addAttribute("employees",employees );
         return "secured_objects";
     }
 }

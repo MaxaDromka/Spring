@@ -53,16 +53,26 @@
 
         <div class="form-group">
             <label for="clientName">Имя клиента</label>
-            <input type="text" class="form-control" id="clientName" name="clientName" required>
+            <select class="form-control" id="clientName" name="clientName.id" required>
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.fullName}"></option>
+            </select>
         </div>
-
         <div class="form-group">
             <label for="serviceType">Тип услуги</label>
             <select class="form-control" id="serviceType" name="serviceType.id" required>
-                <!-- Здесь будет динамическая загрузка типов услуг -->
                 <option th:each="service : ${services}"
                         th:value="${service.id}"
                         th:text="${service.serviceName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="employees">Должность охранника</label>
+            <select class="form-control" id="employees" name="employees.id" required>
+                <option th:each="employee : ${employees}"
+                        th:value="${employee.id}"
+                        th:text="${employee.position}"></option>
             </select>
         </div>
 
@@ -76,13 +86,15 @@
             <th>Адрес объекта</th>
             <th>Имя клиента</th>
             <th>Тип услуги</th>
+            <th>Имя охраннка</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="secured_object : ${secured_objects}">
             <td th:text="${secured_object.objectAddress}"></td>
-            <td th:text="${secured_object.clientName}"></td>
+            <td th:text="${secured_object.clientName.fullName}"></td>
             <td th:text="${secured_object.serviceType.serviceName}"></td>
+            <td th:text="${secured_object.employees.full_name}"></td>
         </tr>
         </tbody>
     </table>

@@ -4,6 +4,8 @@ package com.Security_Agency.demo;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "clients")
@@ -27,6 +29,16 @@ public class Client {
     @Column(name = "contract_serial_number")
     private String contractSerialNumber;
 
+    @OneToMany(mappedBy = "clientName", cascade = CascadeType.ALL)
+    private List<SecuredObjects> securedObject;
+
+    public List<SecuredObjects> getSecuredObject() {
+        return securedObject;
+    }
+
+    public void setSecuredObject(List<SecuredObjects> securedObject) {
+        this.securedObject = securedObject;
+    }
 
     public Client() {
     }

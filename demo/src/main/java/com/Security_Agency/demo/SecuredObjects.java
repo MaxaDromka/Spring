@@ -15,9 +15,9 @@ public class SecuredObjects {
     @Column(name = "object_address", nullable = false)
     private String objectAddress;
 
-
-    @Column(name = "client_name", nullable = false)
-    private String clientName;
+    @ManyToOne
+    @JoinColumn(name = "client_name_id")
+    private Client clientName;
 
     /*public Amenities getAmenities() {
         return amenities;
@@ -32,6 +32,18 @@ public class SecuredObjects {
     @JoinColumn(name = "service_type_id")
     private Amenities serviceType;
 
+    @ManyToOne
+    @JoinColumn(name = "emp_position_id")
+    private Employees employees;
+
+    public Employees getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
+    }
+
     public Amenities getServiceType() {
         return serviceType;
     }
@@ -43,10 +55,10 @@ public class SecuredObjects {
     public SecuredObjects() {
     }
 
-    public SecuredObjects(Long id, String objectAddress, String clientName) {
+    public SecuredObjects(Long id, String objectAddress) {
         this.id = id;
         this.objectAddress = objectAddress;
-        this.clientName = clientName;
+        //this.clientName = clientName;
     }
 
     public Long getId() {
@@ -65,13 +77,12 @@ public class SecuredObjects {
         this.objectAddress = objectAddress;
     }
 
-    public String getClientName() {
+
+    public Client getClientName() {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
+    public void setClientName(Client clientName) {
         this.clientName = clientName;
     }
-
-
 }
