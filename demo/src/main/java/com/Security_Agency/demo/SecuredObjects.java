@@ -27,18 +27,18 @@ public class SecuredObjects {
         this.amenities = amenities;
     }*/
 
-    public String getServiceType() {
+
+    @ManyToOne
+    @JoinColumn(name = "service_type_id")
+    private Amenities serviceType;
+
+    public Amenities getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(String serviceType) {
+    public void setServiceType(Amenities serviceType) {
         this.serviceType = serviceType;
     }
-
-    @Column(name = "service_type", nullable = false) // Убедитесь, что это поле правильно настроено
-    private String serviceType; // Измените тип на String
-
-    // Конструкторы, геттеры и сеттеры
 
     public SecuredObjects() {
     }

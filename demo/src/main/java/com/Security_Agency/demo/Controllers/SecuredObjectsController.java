@@ -28,4 +28,6 @@ public class SecuredObjectsController {
         securedObjectsService.createSecuredObject(securedObject);
         return "redirect:/secured_objects";
     }
+
+
 }

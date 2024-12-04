@@ -61,7 +61,9 @@ public class MainController {
     @GetMapping("/secured_objects")
     public String secured_objects(Model model) {
         Iterable<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
+        Iterable<Amenities> amenities = amenitiesService.getAllAmenities();
         model.addAttribute("secured_objects", securedObjectsList);
+        model.addAttribute("services",amenities );
         return "secured_objects";
     }
 }

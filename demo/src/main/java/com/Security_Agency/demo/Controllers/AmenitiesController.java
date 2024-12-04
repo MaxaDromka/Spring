@@ -23,7 +23,7 @@ public class AmenitiesController {
         public String create(@ModelAttribute Amenities amenity) {
                 System.out.println("Adding new amenity: " + amenity);
                 amenitiesService.createAmenity(amenity);
-                return "redirect:/api/services";
+                return "services";
         }
 
         @GetMapping("/services")
