@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,69 +43,49 @@
             background: #F8F8F8;
         }
 
-        button {
+        a.button {
             background-color: #2d6b9f;
             color: white;
-            border: none;
-            padding: 15px 20px;
-            font-size: 14px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
             display: inline-block;
             margin-bottom: 20px;
         }
 
-        button:hover {
+        a.button:hover {
             background-color: #337AB7;
-        }
-
-        @media (max-width: 767px) {
-            button {
-                width: auto;
-                height: auto;
-                padding: 10px;
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
         }
     </style>
 </head>
 <body>
-<form action="/employees" method="post">
-    <h2>Клиенты</h2>
-    <button type="submit">Добавить клиента</button>
-    <a href="/" class="btn btn-secondary">Вернуться на главную страницу</a>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ФИО</th>
-            <th>Номер телефона</th>
-            <th>Адрес охраняемого объекта</th>
-            <th>Серийный номер договора</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-            <td>+7 (999) 123-45-67</td>
-            <td>Улица Ленина, д.1</td>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <td>Петров Петр Петрович</td>
-            <td>+7 (999) 234-56-78</td>
-            <td>Улица Пушкина, д.2</td>
-            <td>987654321</td>
-        </tr>
-        <tr>
-            <td>Сидоров Сидор Сидорович</td>
-            <td>+7 (999) 345-67-89</td>
-            <td>Улица Гоголя, д.3</td>
-            <td>456789123</td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+<h2>Клиенты</h2>
+<a href="api/customers/new" class="button">Добавить клиента</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ФИО</th>
+        <th>Номер телефона</th>
+        <th>Адрес охраняемого объекта</th>
+        <th>Серийный номер договора</th>
+        <th>Действия</th> <!-- Новый столбец для действий -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.fullName}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td th:text="${client.objectAddress}"></td>
+        <td th:text="${client.contracts != null ? client.contracts.contractSerialNumber : 'Нет'}"></td>
+        <td>
+            <a th:href="@{/api/customers/edit/{id}(id=${client.id})}">Редактировать</a> |
+            <a th:href="@{/api/customers/delete/{id}(id=${client.id})}" onclick="return confirm('Вы уверены?');">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -85,7 +85,7 @@
             <th>Дата начала контракта</th>
             <th>Дата окончания контракта</th>
             <th>Серийный номер контракта</th>
-            <th>Тип услуги</th>
+<!--            <th>Тип услуги</th>-->
         </tr>
         </thead>
         <tbody>
@@ -95,7 +95,7 @@
             <td th:text="${#dates.format(contract.contractStartDate, 'dd.MM.yyyy')}"></td>
             <td th:text="${#dates.format(contract.contractEndDate, 'dd.MM.yyyy')}"></td>
             <td th:text="${contract.contractSerialNumber}"></td>
-            <td th:text="${contract.serviceType}"></td>
+<!--            <td th:text="${contract.serviceType}"></td>-->
         </tr>
         </tbody>
     </table>

@@ -83,7 +83,7 @@ public class Employees {
 
     private String education;
 
-    @OneToMany(mappedBy = "employees", cascade = CascadeType.ALL) // Исправлено здесь
+    @OneToMany(mappedBy = "employees", cascade = CascadeType.ALL)
     private List<SecuredObjects> securedObject;
 
     public List<SecuredObjects> getSecuredObject() {

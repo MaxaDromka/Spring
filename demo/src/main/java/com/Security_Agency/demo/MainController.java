@@ -55,6 +55,10 @@ public class MainController {
     }
     @GetMapping("/customers")
     public String customers(Model model) {
+        Iterable<Client> clients = clientSrvice.getAllClient();
+
+        model.addAttribute("clients",clients );
+
         return "customers";
     }
     @GetMapping("/secured_objects")

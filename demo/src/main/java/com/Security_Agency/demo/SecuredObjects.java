@@ -19,14 +19,6 @@ public class SecuredObjects {
     @JoinColumn(name = "client_name_id")
     private Client clientName;
 
-    /*public Amenities getAmenities() {
-        return amenities;
-    }
-
-    public void setAmenities(Amenities amenities) {
-        this.amenities = amenities;
-    }*/
-
 
     @ManyToOne
     @JoinColumn(name = "service_type_id")

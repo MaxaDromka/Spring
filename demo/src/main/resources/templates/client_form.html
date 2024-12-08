@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма клиента</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d6b9f;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2d6b9f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #337AB7;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #2d6b9f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="${client.id != null} ? 'Редактировать клиента' : 'Добавить клиента'"></h2>
+
+<form th:action="@{${client.id != null} ? '/api/customers/update/' + ${client.id} : '/api/customers/create'}"
+      th:object="${client}" method="post">
+
+    <label for="fullName">ФИО:</label>
+    <input type="text" id="fullName" th:field="*{fullName}" required/>
+
+    <label for="phoneNumber">Номер телефона:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
+
+    <label for="objectAddress">Адрес охраняемого объекта:</label>
+    <input type="text" id="objectAddress" th:field="*{objectAddress}" required/>
+
+    <button type="submit">Сохранить</button>
+
+    <div class="form-group">
+        <label for="contracts">Должность охранника</label>
+        <select class="form-control" id="contracts" name="contracts.id" required>
+            <option th:each="contract : ${contracts}"
+                    th:value="${contract.id}"
+                    th:text="${contract.contractSerialNumber}"></option>
+        </select>
+    </div>
+
+</form>
+
+<a href="/api/customers">Вернуться к списку клиентов</a>
+
+</body>
+</html>

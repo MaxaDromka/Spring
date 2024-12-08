@@ -26,29 +26,30 @@ public class Client {
     @Column(name = "object_address", nullable = false)
     private String objectAddress;
 
-    @Column(name = "contract_serial_number")
-    private String contractSerialNumber;
+    @ManyToOne
+    @JoinColumn(name = "contract_serial_number")
+    private Contracts contracts;
 
-    @OneToMany(mappedBy = "clientName", cascade = CascadeType.ALL)
-    private List<SecuredObjects> securedObject;
-
-    public List<SecuredObjects> getSecuredObject() {
-        return securedObject;
+    public Contracts getContracts() {
+        return contracts;
     }
 
-    public void setSecuredObject(List<SecuredObjects> securedObject) {
-        this.securedObject = securedObject;
+    public void setContracts(Contracts contracts) {
+        this.contracts = contracts;
     }
 
     public Client() {
     }
 
+    public String getContractSerialNumber() {
+        return contracts != null ? contracts.getContractSerialNumber() : null;
+    }
 
-    public Client(Long id, String fullName, String phoneNumber, String objectAddress, String contractSerialNumber) {
+
+    public Client(Long id, String fullName, String phoneNumber, String objectAddress) {
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.objectAddress = objectAddress;
-        this.contractSerialNumber = contractSerialNumber;
     }
 }

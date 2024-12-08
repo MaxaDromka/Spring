@@ -2,6 +2,8 @@ package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "contracts")
 public class Contracts {
@@ -23,6 +25,17 @@ public class Contracts {
 
     @Column(name = "service_type", nullable = false, length = 100)
     private String serviceType;
+
+    @OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
+    private List<Client> clients;
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
 
     public Contracts() {
     }

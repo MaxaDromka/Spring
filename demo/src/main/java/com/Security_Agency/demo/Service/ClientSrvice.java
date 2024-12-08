@@ -14,4 +14,10 @@ public class ClientSrvice {
     public Iterable<Client> getAllClient() {
         return clientRep.findAll();
     }
+
+    public Iterable<Client> getAllSecuredObjects() {
+        return clientRep.findAll();
+    }
+
+
 }

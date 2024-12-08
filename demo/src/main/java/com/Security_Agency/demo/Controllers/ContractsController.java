@@ -1,6 +1,7 @@
 package com.Security_Agency.demo.Controllers;
 
 import com.Security_Agency.demo.Contracts;
+import com.Security_Agency.demo.Service.ClientSrvice;
 import com.Security_Agency.demo.Service.ContractsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,16 +17,19 @@ public class ContractsController {
     @Autowired
     private ContractsService contractsService;
 
+
     @GetMapping
     public String getAllContracts(Model model) {
         List<Contracts> contractsList = contractsService.getAllContracts();
         model.addAttribute("contracts", contractsList);
-        return "contracts"; // Thymeleaf template name
+        return "contracts";
     }
 
     @PostMapping("/create")
     public String create(@ModelAttribute Contracts contract) {
         contractsService.createContract(contract);
-        return "redirect:/contracts"; // Redirect to the list after creation
+        return "redirect:/contracts";
     }
+
+
 }
