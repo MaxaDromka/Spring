@@ -29,6 +29,9 @@ public class Contracts {
     @OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
     private List<Client> clients;
 
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    private List<Revenue> revenues;
+
     public List<Client> getClients() {
         return clients;
     }

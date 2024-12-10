@@ -15,14 +15,16 @@ public class MainController {
     private final AmenitiesService amenitiesService;
     private final ContractsService contractsService;
     private final ClientSrvice clientSrvice;
+    private final RevenueService revenueService;
 
     private final SecuredObjectsService securedObjectsService;
     @Autowired
-    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, ClientSrvice clientSrvice, SecuredObjectsService securedObjectsService) {
+    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, ClientSrvice clientSrvice, RevenueService revenueService, SecuredObjectsService securedObjectsService) {
         this.employeesService = employeesService;
         this.amenitiesService = amenitiesService;
         this.contractsService = contractsService;
         this.clientSrvice = clientSrvice;
+        this.revenueService = revenueService;
         this.securedObjectsService = securedObjectsService;
     }
 
@@ -38,6 +40,10 @@ public class MainController {
     }
     @GetMapping("/revenue")
     public String revenue(Model model) {
+        List<Revenue> revenues = revenueService.getAllRevenue();
+        List<Contracts> amenitiesList = contractsService.getAllContracts();
+        model.addAttribute("contracts", amenitiesList);
+        model.addAttribute("revenue",revenues);
         return "revenue";
     }
 
