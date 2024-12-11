@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Optional;
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class EmployeesService {
 
     public void deleteEmp(Long id) {
         empRepo.deleteById(id);
+    }
+
+    public List<Employees> searchEmployees(String fullName, String position) {
+        return empRepo.searchByFullNameAndPosition(fullName, position);
     }
 
 }

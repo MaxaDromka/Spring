@@ -3,12 +3,16 @@ package com.Security_Agency.demo.Controllers;
 import com.Security_Agency.demo.Employees;
 import com.Security_Agency.demo.Repo.EmpRepo;
 import com.Security_Agency.demo.Service.EmployeesService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,4 +84,17 @@ public class EmployeesController {
         Employees updatedEmployee = employeesService.updateEmp(id, employeeDetails);
         return "redirect:/api/employees";
     }
+
+    @GetMapping("/search")
+    public String searchEmployees(
+            @RequestParam(required = false, defaultValue = "") String fullName,
+            @RequestParam(required = false, defaultValue = "") String position,
+            Model model) {
+        List<Employees> result = employeesService.searchEmployees(fullName, position);
+        model.addAttribute("employees", result);
+        return "employees";
+    }
+
+
+
 }
