@@ -34,7 +34,6 @@ public class ContractsService {
             existingContract.setContractStartDate(contractDetails.getContractStartDate());
             existingContract.setContractEndDate(contractDetails.getContractEndDate());
             existingContract.setContractSerialNumber(contractDetails.getContractSerialNumber());
-            existingContract.setServiceType(contractDetails.getServiceType());
             return contractsRepo.save(existingContract);
         }
         return null;

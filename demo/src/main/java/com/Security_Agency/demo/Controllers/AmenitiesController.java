@@ -2,6 +2,7 @@ package com.Security_Agency.demo.Controllers;
 
 import com.Security_Agency.demo.Amenities;
 import com.Security_Agency.demo.Repo.SerRepo;
+import com.Security_Agency.demo.SecuredObjects;
 import com.Security_Agency.demo.Service.AmenitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/api/services")
 public class AmenitiesController {
 
@@ -23,7 +24,7 @@ public class AmenitiesController {
         public String create(@ModelAttribute Amenities amenity) {
                 System.out.println("Adding new amenity: " + amenity);
                 amenitiesService.createAmenity(amenity);
-                return "services";
+                return "redirect:/services";
         }
 
         @GetMapping("/services")
@@ -54,7 +55,7 @@ public class AmenitiesController {
         @GetMapping("/services/delete/{id}")
         public String deleteAmenity(Model model,@PathVariable("id") Long id) {
                 amenitiesService.deleteAmenity(id);
-                return "/services";
+                return "redirect:/services";
         }
 
         /*@DeleteMapping("/{id}")

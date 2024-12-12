@@ -49,12 +49,12 @@
   <table class="table mt-4">
     <thead>
     <tr>
-      <th>ID</th>
       <th>ФИО</th>
       <th>Должность</th>
       <th>Дата найма</th>
       <th>Зарплата</th>
       <th>Образование</th>
+      <th>Действия</th>
       <th></th>
       <th></th>
       <th></th>
@@ -62,7 +62,6 @@
     </thead>
     <tbody>
     <tr th:each="employee : ${employees}">
-      <td th:text="${employee.id}"></td>
       <td th:text="${employee.full_name}"></td>
       <td th:text="${employee.position}"></td>
       <td th:text="${#dates.format(employee.hire_date, 'dd.MM.yyyy')}"></td>

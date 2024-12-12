@@ -32,4 +32,27 @@ public class ContractsController {
     }
 
 
+
+    @GetMapping("/edit/{id}")
+    public String editContractForm(@PathVariable Long id, Model model) {
+        Contracts contract = contractsService.getContractById(id).orElseThrow(() -> new IllegalArgumentException("Invalid contract ID:" + id));
+        model.addAttribute("contract", contract);
+        return "edit-contract";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateContract(@PathVariable Long id, @ModelAttribute Contracts contractDetails) {
+        contractsService.updateContract(id, contractDetails);
+        return "redirect:/api/contracts";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteContract(@PathVariable Long id) {
+        contractsService.deleteContract(id);
+        return "redirect:/api/contracts";
+    }
+
+
+
+
 }

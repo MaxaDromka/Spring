@@ -68,11 +68,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="employees">Должность охранника</label>
+            <label for="employees">Имя охранника</label>
             <select class="form-control" id="employees" name="employees.id" required>
                 <option th:each="employee : ${employees}"
                         th:value="${employee.id}"
-                        th:text="${employee.position}"></option>
+                        th:text="${employee.full_name}"></option>
             </select>
         </div>
 
@@ -86,7 +86,7 @@
             <th>Адрес объекта</th>
             <th>Имя клиента</th>
             <th>Тип услуги</th>
-            <th>Имя охраннка</th>
+            <th>Имя охранника</th>
         </tr>
         </thead>
         <tbody>

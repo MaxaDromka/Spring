@@ -23,8 +23,8 @@ public class Contracts {
     @Column(name = "contract_serial_number", nullable = false, unique = true, length = 50)
     private String contractSerialNumber;
 
-    @Column(name = "service_type", nullable = false, length = 100)
-    private String serviceType;
+    /*@Column(name = "service_type", nullable = false, length = 100)
+    private String serviceType;*/
 
     @OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
     private List<Client> clients;
@@ -44,13 +44,12 @@ public class Contracts {
     }
 
     public Contracts(int id, double amount, java.sql.Date contractStartDate, java.sql.Date contractEndDate,
-                     String contractSerialNumber, String serviceType) {
+                     String contractSerialNumber) {
         this.id = id;
         this.amount = amount;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractSerialNumber = contractSerialNumber;
-        this.serviceType = serviceType;
     }
 
     public int getId() {
@@ -93,11 +92,4 @@ public class Contracts {
         this.contractSerialNumber = contractSerialNumber;
     }
 
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
 }

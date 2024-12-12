@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование контракта</title>
+</head>
+<body>
+<h2>Редактировать контракт</h2>
+<form th:action="@{/api/contracts/edit/{id}(id=${contract.id})}" th:object="${contract}" method="post">
+    <label for="amount">Сумма:</label>
+    <input type="number" id="amount" name="amount" th:value="${contract.amount}" required><br><br>
+
+    <label for="contractStartDate">Дата начала:</label>
+    <input type="date" id="contractStartDate" name="contractStartDate" th:value="${contract.contractStartDate}" required><br><br>
+
+    <label for="contractEndDate">Дата окончания:</label>
+    <input type="date" id="contractEndDate" name="contractEndDate" th:value="${contract.contractEndDate}" required><br><br>
+
+    <label for="contractSerialNumber">Серийный номер:</label>
+    <input type="text" id="contractSerialNumber" name="contractSerialNumber" th:value="${contract.contractSerialNumber}" required><br><br>
+
+    <button type="submit">Сохранить изменения</button>
+    <a href="/api/contracts">Отмена</a>
+</form>
+</body>
+</html>
