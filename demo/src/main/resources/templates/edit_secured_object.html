@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование объекта</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Редактирование объекта</h2>
+
+    <form action="/api/secured_objects/update/{securedObject.id}" method="post">
+        <div class="form-group">
+            <label for="objectAddress">Адрес объекта</label>
+            <input type="text" class="form-control" id="objectAddress" name="objectAddress" th:value="${securedObject.objectAddress}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="clientName">Имя клиента</label>
+            <select class="form-control" id="clientName" name="clientName.id" required>
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.fullName}"
+                        th:selected="${client.id == securedObject.clientName.id}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="serviceType">Тип услуги</label>
+            <select class="form-control" id="serviceType" name="serviceType.id" required>
+                <option th:each="service : ${services}"
+                        th:value="${service.id}"
+                        th:text="${service.serviceName}"
+                        th:selected="${service.id == securedObject.serviceType.id}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="employees">Имя охранника</label>
+            <select class="form-control" id="employees" name="employees.id" required>
+                <option th:each="employee : ${employees}"
+                        th:value="${employee.id}"
+                        th:text="${employee.full_name}"
+                        th:selected="${employee.id == securedObject.employees.id}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a href="/api/secured_objects" class="btn btn-secondary">Назад</a>
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

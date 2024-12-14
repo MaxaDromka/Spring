@@ -9,7 +9,7 @@ import java.util.List;
 public class Amenities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "service_name", nullable = false, unique = true, length = 100)
     private String serviceName;
@@ -27,7 +27,7 @@ public class Amenities {
     public Amenities() {
     }
 
-    public Amenities(int id, String serviceName, String serviceDescription, double servicePrice) {
+    public Amenities(Long id, String serviceName, String serviceDescription, double servicePrice) {
         this.id = id;
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
@@ -35,11 +35,11 @@ public class Amenities {
     }
 
     // Геттеры и сеттеры
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

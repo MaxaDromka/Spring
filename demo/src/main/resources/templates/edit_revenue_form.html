@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать выручку</title>
+    <style>
+        /* Добавьте ваш CSS стиль для формы */
+    </style>
+</head>
+<body>
+<h2>Редактировать запись выручки</h2>
+<form action="/api/revenue/update/{id}" method="post">
+    <input type="hidden" name="id" th:value="${revenue.id}" />
+
+    <div>
+        <label for="receiptDate">Дата:</label>
+        <input type="date" id="receiptDate" name="receiptDate" th:value="${revenue.receiptDate}" required />
+    </div>
+    <div>
+        <label for="revenueAmount">Сумма:</label>
+        <input type="number" id="revenueAmount" name="revenueAmount" step="0.01" th:value="${revenue.revenueAmount}" required />
+    </div>
+    <div>
+        <label for="contract">Договор:</label>
+        <select name="contract" id="contract">
+            <option th:each="contract : ${contracts}" th:value="${contract.id}" th:text="${contract.contractSerialNumber}"
+                    th:selected="${contract.id == revenue.contract.id}"></option>
+        </select>
+    </div>
+    <button type="submit">Сохранить изменения</button>
+</form>
+</body>
+</html>

@@ -50,4 +50,6 @@ public class AmenitiesService {
     public void deleteAmenity(Long id) {
         serRepo.deleteById(id);
     }
+
+
 }

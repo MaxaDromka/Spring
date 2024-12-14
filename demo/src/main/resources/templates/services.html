@@ -99,6 +99,7 @@
         <th>Название услуги</th>
         <th>Описание услуги</th>
         <th>Цена услуги</th>
+        <th>Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -106,7 +107,10 @@
         <td th:text="${amenity.serviceName}"></td>
         <td th:text="${amenity.serviceDescription}"></td>
         <td th:text="${#numbers.formatDecimal(amenity.servicePrice, 2, 2)}"></td>
-        <td><a class="btn btn-danger" th:href="@{/api/services/services/delete/{id}(id=${amenity.id})}">Удалить</a></td>
+        <td>
+            <a href="/api/services/edit/{id}" th:href="@{/api/services/edit/{id}(id=${amenity.id})}" class="btn btn-warning">Редактировать</a> |
+            <a href="/api/services/services/delete/{id}" th:href="@{/api/services/services/delete/{id}(id=${amenity.id})}" class="btn btn-danger">Удалить</a>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование услуги</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d6b9f;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2d6b9f;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #337AB7;
+        }
+
+        @media (max-width: 767px) {
+            button {
+                width: auto;
+                height: auto;
+                padding: 10px;
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Редактировать услугу</h2>
+
+<!-- Форма для редактирования услуги -->
+<form th:action="@{/api/services/update/{id}(id=${service.id})}" method="post">
+    <div class="form-group">
+        <label for="serviceName">Название услуги:</label>
+        <!-- Используем th:value для передачи значений из модели -->
+        <input type="text" id="serviceName" name="serviceName" th:value="${service.serviceName}" required>
+    </div>
+    <div class="form-group">
+        <label for="serviceDescription">Описание услуги:</label>
+        <input type="text" id="serviceDescription" name="serviceDescription" th:value="${service.serviceDescription}" required>
+    </div>
+    <div class="form-group">
+        <label for="servicePrice">Цена услуги:</label>
+        <input type="number" id="servicePrice" name="servicePrice" th:value="${service.servicePrice}" required step="0.01">
+    </div>
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+<a href="/api/services/services" class="btn btn-secondary">Вернуться к услугам</a>
+
+</body>
+</html>

@@ -18,6 +18,7 @@ public class AmenitiesController {
 
         @Autowired
         private AmenitiesService amenitiesService;
+        @Autowired
         private SerRepo serRepo;
 
         @PostMapping("/create")
@@ -39,11 +40,6 @@ public class AmenitiesController {
                 return amenitiesService.getAmenityById(id);
         }
 
-
-        @PutMapping("/{id}")
-        public Amenities updateAmenity(@PathVariable Long id, @RequestBody Amenities amenityDetails) {
-                return amenitiesService.updateAmenity(id, amenityDetails);
-        }
 
 
         @DeleteMapping
@@ -69,4 +65,23 @@ public class AmenitiesController {
                 model.addAttribute("services", services);
                 return "services"; // Убедитесь, что имя соответствует файлу services.html в папке templates
         }*/
+
+        @GetMapping("/edit/{id}")
+        public String editAmenity(@PathVariable Long id, Model model) {
+                Optional<Amenities> amenity = amenitiesService.getAmenityById(id);
+                if (amenity.isPresent()) {
+                        model.addAttribute("service", amenity.get());
+                } else {
+                        return "redirect:/api/services/services";
+                }
+                return "edit_amenity";
+        }
+
+        @PostMapping("/update/{id}")
+        public String updateAmenity(@PathVariable Long id, @ModelAttribute Amenities amenity) {
+                amenity.setId(id);
+                serRepo.save(amenity);
+                return "redirect:/api/services/services";
+        }
+
 }

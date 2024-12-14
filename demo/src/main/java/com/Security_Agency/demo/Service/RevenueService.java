@@ -19,4 +19,14 @@ public class RevenueService {
     public Revenue saveRevenue(Revenue revenue) {
         return revenueRepository.save(revenue);
     }
+
+    public Revenue getRevenueById(Long id) {
+        return revenueRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid revenue Id:" + id));
+    }
+
+    public void deleteRevenue(Long id) {
+        revenueRepository.deleteById(id);
+    }
+
+
 }
