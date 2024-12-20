@@ -12,38 +12,39 @@ import java.util.Optional;
 public class ContractsService {
 
     @Autowired
-    private ContractsRepo contractsRepo;
+    private ContractsRepo contractsRepository;
 
+    // Создание нового контракта
     public Contracts createContract(Contracts contract) {
-        return contractsRepo.save(contract);
+        return contractsRepository.save(contract);
     }
 
+    // Получение всех контрактов
     public List<Contracts> getAllContracts() {
-        return contractsRepo.findAll();
+        return contractsRepository.findAll();
     }
 
+    // Получение контракта по ID
     public Optional<Contracts> getContractById(Long id) {
-        return contractsRepo.findById(id);
+        return contractsRepository.findById(id);
     }
 
+    // Обновление контракта
     public Contracts updateContract(Long id, Contracts contractDetails) {
-        Optional<Contracts> existingContractOpt = contractsRepo.findById(id);
+        Optional<Contracts> existingContractOpt = contractsRepository.findById(id);
         if (existingContractOpt.isPresent()) {
             Contracts existingContract = existingContractOpt.get();
             existingContract.setAmount(contractDetails.getAmount());
             existingContract.setContractStartDate(contractDetails.getContractStartDate());
             existingContract.setContractEndDate(contractDetails.getContractEndDate());
             existingContract.setContractSerialNumber(contractDetails.getContractSerialNumber());
-            return contractsRepo.save(existingContract);
+            return contractsRepository.save(existingContract);
         }
         return null;
     }
 
-    public void deleteAllContracts() {
-        contractsRepo.deleteAll();
-    }
-
+    // Удаление контракта
     public void deleteContract(Long id) {
-        contractsRepo.deleteById(id);
+        contractsRepository.deleteById(id);
     }
 }

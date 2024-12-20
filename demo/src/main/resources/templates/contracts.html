@@ -59,68 +59,89 @@
         button:hover {
             background-color: #337AB7;
         }
-
-        @media (max-width: 767px) {
-            button {
-                width: auto;
-                height: auto;
-                padding: 10px;
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
-        }
     </style>
 </head>
 <body>
 
 <form action="/api/contracts/create" method="post">
-    <label for="amount">Сумма:</label>
-    <input type="number" id="amount" name="amount" required><br><br>
+    <div class="form-group">
+        <label for="amount">Сумма:</label>
+        <input type="number" class="form-control" id="amount" name="amount" required>
+    </div>
 
-    <label for="contractStartDate">Дата начала:</label>
-    <input type="date" id="contractStartDate" name="contractStartDate" required><br><br>
+    <div class="form-group">
+        <label for="contractStartDate">Дата начала:</label>
+        <input type="date" class="form-control" id="contractStartDate" name="contractStartDate" required>
+    </div>
 
-    <label for="contractEndDate">Дата окончания:</label>
-    <input type="date" id="contractEndDate" name="contractEndDate" required><br><br>
+    <div class="form-group">
+        <label for="contractEndDate">Дата окончания:</label>
+        <input type="date" class="form-control" id="contractEndDate" name="contractEndDate" required>
+    </div>
 
-    <label for="contractSerialNumber">Серийный номер:</label>
-    <input type="text" id="contractSerialNumber" name="contractSerialNumber" required><br><br>
-    <button type="submit">Создать контракт</button>
+    <div class="form-group">
+        <label for="contractSerialNumber">Серийный номер:</label>
+        <input type="text" class="form-control" id="contractSerialNumber" name="contractSerialNumber" required>
+    </div>
+
+    <!-- Поле для выбора услуги -->
+    <div class="form-group">
+        <label for="serviceType">Тип услуги</label>
+        <select class="form-control" id="serviceType" name="amenities.id" required>
+            <option th:each="service : ${services}"
+                    th:value="${service.id}"
+                    th:text="${service.serviceName}"></option>
+        </select>
+    </div>
+
+    <!-- Поле для вывода цены услуги -->
+    <div class="form-group">
+        <label for="servicePrice">Цена услуги:</label>
+        <input type="text" class="form-control" id="servicePrice" name="servicePrice" disabled>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Создать контракт</button>
 </form>
 
+<script>
+    document.getElementById('serviceType').addEventListener('change', function() {
+        var selectedServiceId = this.value;
+        fetch('/api/services/' + selectedServiceId)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('servicePrice').value = data.servicePrice;
+            })
+            .catch(error => console.error('Ошибка:', error));
+    });
+</script>
 
-<form action="/contracts" method="post">
-    <h2>Контракты</h2>
-    <button type="submit">Добавить контракт</button>
-    <a href="/" class="btn btn-secondary">Назад</a>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Сумма</th>
-            <th>Дата начала контракта</th>
-            <th>Дата окончания контракта</th>
-            <th>Серийный номер контракта</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="contract : ${contracts}">
-            <td th:text="${#numbers.formatDecimal(contract.amount, 2, 2)}"></td>
-            <td th:text="${#dates.format(contract.contractStartDate, 'dd.MM.yyyy')}"></td>
-            <td th:text="${#dates.format(contract.contractEndDate, 'dd.MM.yyyy')}"></td>
-            <td th:text="${contract.contractSerialNumber}"></td>
-            <td>
-            <a th:href="@{/api/contracts/edit/{id}(id=${contract.id})}" class="btn btn-primary">Редактировать</a>
+<h2>Контракты</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Сумма</th>
+        <th>Дата начала контракта</th>
+        <th>Дата окончания контракта</th>
+        <th>Серийный номер контракта</th>
+        <th>Название услуги</th>
+        <th>Цена услуги</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contract : ${contracts}">
+        <td th:text="${#numbers.formatDecimal(contract.amount, 2, 2)}"></td>
+        <td th:text="${#dates.format(contract.contractStartDate, 'dd.MM.yyyy')}"></td>
+        <td th:text="${#dates.format(contract.contractEndDate, 'dd.MM.yyyy')}"></td>
+        <td th:text="${contract.contractSerialNumber}"></td>
+        <td th:text="${contract.amenities.serviceName}"></td>
+        <td th:text="${#numbers.formatDecimal(contract.amenities.servicePrice, 2, 2)}"></td>
+    </tr>
+    </tbody>
+</table>
 
-            <form th:action="@{/api/contracts/delete/{id}(id=${contract.id})}" method="post" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Удалить</button>
-            </form>
-    </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

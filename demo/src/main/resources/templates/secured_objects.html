@@ -87,6 +87,7 @@
             <th>Имя клиента</th>
             <th>Тип услуги</th>
             <th>Имя охранника</th>
+            <th>Цена услуги</th>
         </tr>
         </thead>
         <tbody>
@@ -95,6 +96,7 @@
             <td th:text="${secured_object.clientName.fullName}"></td>
             <td th:text="${secured_object.serviceType.serviceName}"></td>
             <td th:text="${secured_object.employees.full_name}"></td>
+            <td th:text="${secured_object.serviceType.servicePrice}"></td>
         </tr>
         </tbody>
     </table>

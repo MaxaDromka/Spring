@@ -68,7 +68,8 @@
         <th>Номер телефона</th>
         <th>Адрес охраняемого объекта</th>
         <th>Серийный номер договора</th>
-        <th>Действия</th> <!-- Новый столбец для действий -->
+        <th>Сумма</th>
+        <th>Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -77,6 +78,7 @@
         <td th:text="${client.phoneNumber}"></td>
         <td th:text="${client.objectAddress}"></td>
         <td th:text="${client.contracts != null ? client.contracts.contractSerialNumber : 'Нет'}"></td>
+        <td th:text="${client.contracts.amount}"></td>
         <td>
             <a th:href="@{/api/customers/edit/{id}(id=${client.id})}">Редактировать</a> |
             <a th:href="@{/api/customers/delete/{id}(id=${client.id})}" onclick="return confirm('Вы уверены?');">Удалить</a>

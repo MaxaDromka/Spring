@@ -14,12 +14,14 @@ public class AmenitiesService {
     private SerRepo serRepo;
 
 
+
+
     public Amenities createAmenity(Amenities amenity) {
         return serRepo.save(amenity);
     }
 
 
-    public Iterable<Amenities> getAllAmenities() {
+    public List<Amenities> getAllAmenities() {
         return serRepo.findAll();
     }
 
@@ -50,6 +52,12 @@ public class AmenitiesService {
     public void deleteAmenity(Long id) {
         serRepo.deleteById(id);
     }
+
+    public Amenities getAmenitiesById(Long id) {
+        return serRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Service not found for ID: " + id));
+    }
+
 
 
 }

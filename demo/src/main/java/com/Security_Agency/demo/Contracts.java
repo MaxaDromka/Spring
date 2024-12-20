@@ -1,9 +1,10 @@
 package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
 @Entity
 @Table(name = "contracts")
 public class Contracts {
@@ -23,14 +24,19 @@ public class Contracts {
     @Column(name = "contract_serial_number", nullable = false, unique = true, length = 50)
     private String contractSerialNumber;
 
-    /*@Column(name = "service_type", nullable = false, length = 100)
-    private String serviceType;*/
 
     @OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
     private List<Client> clients;
 
-    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
-    private List<Revenue> revenues;
+   /* @OneToMany(mappedBy = "revenues", cascade = CascadeType.ALL)
+    private List<Revenue> revenues;*/
+
+    @OneToOne
+    @JoinColumn(name = "service_type_id")
+    private Amenities amenities;
+
+    /*@Column(name = "service_price")
+    private double servicePrice;*/
 
     public List<Client> getClients() {
         return clients;

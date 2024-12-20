@@ -1,9 +1,11 @@
 package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "services")
 public class Amenities {
@@ -20,8 +22,14 @@ public class Amenities {
     @Column(name = "service_price", nullable = false)
     private double servicePrice;
 
-    @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
-    private List<SecuredObjects> securedObject;
+
+    @OneToOne (mappedBy = "amenities")
+    private Contracts contracts;
+    /*@OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
+    private List<Contracts> contracts;*/
+
+    /*@OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
+    private List<SecuredObjects> securedObject;*/
 
     // Конструкторы
     public Amenities() {
@@ -67,11 +75,11 @@ public class Amenities {
         this.servicePrice = servicePrice;
     }
 
-    public List<SecuredObjects> getSecuredObject() {
+    /*public List<SecuredObjects> getSecuredObject() {
         return securedObject;
     }
 
     public void setSecuredObject(List<SecuredObjects> securedObject) {
         this.securedObject = securedObject;
-    }
+    }*/
 }

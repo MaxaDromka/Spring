@@ -1,6 +1,8 @@
 package com.Security_Agency.demo.Controllers;
 
+import com.Security_Agency.demo.Amenities;
 import com.Security_Agency.demo.Contracts;
+import com.Security_Agency.demo.Service.AmenitiesService;
 import com.Security_Agency.demo.Service.ClientSrvice;
 import com.Security_Agency.demo.Service.ContractsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,15 @@ public class ContractsController {
 
     @Autowired
     private ContractsService contractsService;
+    @Autowired
+    private AmenitiesService amenitiesService;
 
 
     @GetMapping
     public String getAllContracts(Model model) {
         List<Contracts> contractsList = contractsService.getAllContracts();
+        List<Amenities> amenitiesList = amenitiesService.getAllAmenities();
+        model.addAttribute("services",amenitiesList);
         model.addAttribute("contracts", contractsList);
         return "contracts";
     }

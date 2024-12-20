@@ -88,7 +88,7 @@
     <button type="submit">Сохранить</button>
 
     <div class="form-group">
-        <label for="contracts">Должность охранника</label>
+        <label for="contracts">Номер контракта</label>
         <select class="form-control" id="contracts" name="contracts.id" required>
             <option th:each="contract : ${contracts}"
                     th:value="${contract.id}"

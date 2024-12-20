@@ -81,4 +81,10 @@ public class MainController {
         model.addAttribute("employees",employees );
         return "secured_objects";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Return the login view
+    }
+
 }
