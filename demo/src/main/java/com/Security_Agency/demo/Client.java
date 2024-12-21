@@ -22,13 +22,11 @@ public class Client {
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
-
-    @Column(name = "object_address", nullable = false)
-    private String objectAddress;
-
     @ManyToOne
     @JoinColumn(name = "contract_serial_number")
     private Contracts contracts;
+
+
 
     public Contracts getContracts() {
         return contracts;
@@ -46,10 +44,9 @@ public class Client {
     }
 
 
-    public Client(Long id, String fullName, String phoneNumber, String objectAddress) {
+    public Client(Long id, String fullName, String phoneNumber) {
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
-        this.objectAddress = objectAddress;
     }
 }

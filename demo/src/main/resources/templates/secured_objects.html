@@ -60,14 +60,6 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="serviceType">Тип услуги</label>
-            <select class="form-control" id="serviceType" name="serviceType.id" required>
-                <option th:each="service : ${services}"
-                        th:value="${service.id}"
-                        th:text="${service.serviceName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="employees">Имя охранника</label>
             <select class="form-control" id="employees" name="employees.id" required>
                 <option th:each="employee : ${employees}"
@@ -85,19 +77,17 @@
         <tr>
             <th>Адрес объекта</th>
             <th>Имя клиента</th>
-            <th>Тип услуги</th>
             <th>Имя охранника</th>
-            <th>Цена услуги</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="secured_object : ${secured_objects}">
             <td th:text="${secured_object.objectAddress}"></td>
-            <td th:text="${secured_object.clientName.fullName}"></td>
-            <td th:text="${secured_object.serviceType.serviceName}"></td>
-            <td th:text="${secured_object.employees.full_name}"></td>
-            <td th:text="${secured_object.serviceType.servicePrice}"></td>
+            <td th:text="${secured_object.clientName != null ? secured_object.clientName.fullName : 'No client'}"></td>
+            <td th:text="${secured_object.employees != null ? secured_object.employees.full_name : 'No guard'}"></td>
         </tr>
+
+
         </tbody>
     </table>
 </div>

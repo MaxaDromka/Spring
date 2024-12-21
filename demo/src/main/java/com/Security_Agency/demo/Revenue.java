@@ -15,9 +15,6 @@ public class Revenue {
     @Column(name = "receipt_date", nullable = false)
     private Date receiptDate;
 
-    @Column(name = "revenue_amount", nullable = false, precision = 10, scale = 2)
-    private BigDecimal revenueAmount;
-
     @ManyToOne
     @JoinColumn(name = "contract_serial_number_id", nullable = false)
     private Contracts contract;
@@ -26,8 +23,8 @@ public class Revenue {
 
     public Revenue(Date receiptDate, BigDecimal revenueAmount, Contracts contract) {
         this.receiptDate = receiptDate;
-        this.revenueAmount = revenueAmount;
-        this.contract = contract;
+        //this.revenueAmount = revenueAmount;
+        //this.contract = contract;
     }
 
     public int getId() {
@@ -46,13 +43,13 @@ public class Revenue {
         this.receiptDate = receiptDate;
     }
 
-    public BigDecimal getRevenueAmount() {
+   /* public BigDecimal getRevenueAmount() {
         return revenueAmount;
     }
 
     public void setRevenueAmount(BigDecimal revenueAmount) {
         this.revenueAmount = revenueAmount;
-    }
+    }*/
 
     public Contracts getContract() {
         return contract;
@@ -60,5 +57,11 @@ public class Revenue {
 
     public void setContract(Contracts contract) {
         this.contract = contract;
+    }
+
+    // Метод для получения суммы, связанной с контрактом
+    public BigDecimal getRevenueAmount() {
+        // Получаем сумму из контракта (например, поле amount в Contracts)
+        return contract != null ? BigDecimal.valueOf(contract.getAmount()) : BigDecimal.ZERO;
     }
 }

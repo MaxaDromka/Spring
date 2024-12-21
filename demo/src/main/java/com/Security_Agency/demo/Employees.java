@@ -1,7 +1,6 @@
 package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -17,7 +16,7 @@ public class Employees {
     private String full_name;
     private String position;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -1,5 +1,6 @@
 package com.Security_Agency.demo;
 
+import com.Security_Agency.demo.Repo.SecuredObjectsRepo;
 import com.Security_Agency.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +18,18 @@ public class MainController {
     private final ClientSrvice clientSrvice;
     private final RevenueService revenueService;
 
+    @Autowired
+    private final SecuredObjectsRepo securedObjectsRepo;
+
     private final SecuredObjectsService securedObjectsService;
     @Autowired
-    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, ClientSrvice clientSrvice, RevenueService revenueService, SecuredObjectsService securedObjectsService) {
+    public MainController(EmployeesService employeesService, AmenitiesService amenitiesService, ContractsService contractsService, ClientSrvice clientSrvice, RevenueService revenueService, SecuredObjectsRepo securedObjectsRepo, SecuredObjectsService securedObjectsService) {
         this.employeesService = employeesService;
         this.amenitiesService = amenitiesService;
         this.contractsService = contractsService;
         this.clientSrvice = clientSrvice;
         this.revenueService = revenueService;
+        this.securedObjectsRepo = securedObjectsRepo;
         this.securedObjectsService = securedObjectsService;
     }
 
@@ -49,8 +54,10 @@ public class MainController {
 
     @GetMapping("/contracts")
     public String contracts(Model model) {
-        List<Contracts> amenitiesList = contractsService.getAllContracts();
-        model.addAttribute("contracts", amenitiesList);
+        List<Contracts> contracts = contractsService.getAllContracts();
+        List<Amenities> amenities = amenitiesService.getAllAmenities();
+        model.addAttribute("contracts", contracts);
+        model.addAttribute("services", amenities);
         return "contracts";
     }
     @GetMapping("/services")
@@ -70,13 +77,13 @@ public class MainController {
     @GetMapping("/secured_objects")
     public String secured_objects(Model model) {
 
-        Iterable<SecuredObjects> securedObjectsList = securedObjectsService.getAllSecuredObjects();
-        Iterable<Amenities> amenities = amenitiesService.getAllAmenities();
+        Iterable<SecuredObjects> securedObjectsList = securedObjectsRepo.findAll();
+        //Iterable<Amenities> amenities = amenitiesService.getAllAmenities();
         Iterable<Client> clients = clientSrvice.getAllClient();
         Iterable<Employees> employees = employeesService.getAllEmployees();
 
         model.addAttribute("secured_objects", securedObjectsList);
-        model.addAttribute("services",amenities );
+        // model.addAttribute("services",amenities );
         model.addAttribute("clients",clients );
         model.addAttribute("employees",employees );
         return "secured_objects";

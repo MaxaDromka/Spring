@@ -23,8 +23,8 @@ public class Amenities {
     private double servicePrice;
 
 
-    @OneToOne (mappedBy = "amenities")
-    private Contracts contracts;
+    @OneToMany(mappedBy = "amenities", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Contracts> contracts;
     /*@OneToMany(mappedBy = "contracts", cascade = CascadeType.ALL)
     private List<Contracts> contracts;*/
 

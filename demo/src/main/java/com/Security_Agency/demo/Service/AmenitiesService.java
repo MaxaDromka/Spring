@@ -1,7 +1,8 @@
 package com.Security_Agency.demo.Service;
 
 import com.Security_Agency.demo.Amenities;
-import com.Security_Agency.demo.Repo.SerRepo;
+import com.Security_Agency.demo.Repo.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -12,6 +13,15 @@ public class AmenitiesService {
 
     @Autowired
     private SerRepo serRepo;
+    @Autowired
+    private SecuredObjectsRepo securedObjectsRepo;
+    @Autowired
+    private ContractsRepo contractsRepo;
+    @Autowired
+    private RevenueRepo revenueRepo;
+
+    @Autowired
+    private ClientRep clientRep;
 
 
 
@@ -57,6 +67,17 @@ public class AmenitiesService {
         return serRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Service not found for ID: " + id));
     }
+
+    @Transactional
+    public void deleteService(Long serviceId) {
+        // Обновляем все записи в SecuredObjects, где ссылаются на услугу
+        //securedObjectsRepo.updateSecuredObjectsServiceToNull(serviceId);
+
+        // Теперь можно безопасно удалить услугу
+        //securedObjectsRepo.deleteById(serviceId);
+    }
+
+
 
 
 

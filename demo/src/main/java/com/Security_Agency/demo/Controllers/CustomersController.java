@@ -65,10 +65,10 @@ public class CustomersController {
 
     @GetMapping("/delete/{id}")
     public String deleteClient(@PathVariable Long id) {
-        List<SecuredObjects> securedObjectsList = securedObjectsRepo.findByClientNameId(id);
-        for (SecuredObjects securedObject : securedObjectsList) {
+        //List<SecuredObjects> securedObjectsList = securedObjectsRepo.findByClientNameId(id);
+        /*for (SecuredObjects securedObject : securedObjectsList) {
             securedObjectsRepo.delete(securedObject);
-        }
+        }*/
 
         clientRep.deleteById(id);
         return "redirect:/customers";

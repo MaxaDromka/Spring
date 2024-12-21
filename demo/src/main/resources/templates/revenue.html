@@ -61,20 +61,25 @@
 <body>
 <h2>Выручка</h2>
 <a href="/api/revenue/new" class="button">Добавить запись</a>
+<a href="/api/revenue/report" class="button">Создать отчет по выручке</a>
+
 <table class="table">
     <thead>
     <tr>
-        <th>Дата</th>
-        <th>Сумма</th>
-        <th>Серийный номер договора</th>
+        <th>Дата создания записи</th>
+        <th>Номер договора</th>
+        <th>Сумма по договору</th>
+        <th>Дата начала договора</th>
         <th>Действия</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="revenue : ${revenue}">
         <td th:text="${#dates.format(revenue.receiptDate, 'dd.MM.yyyy')}"></td>
-        <td th:text="${revenue.revenueAmount}"></td>
+        <!-- Здесь выводим данные контракта -->
         <td th:text="${revenue.contract.contractSerialNumber}"></td>
+        <td th:text="${revenue.contract.amount}"></td>
+        <td th:text="${#dates.format(revenue.contract.contractStartDate, 'dd.MM.yyyy')}"></td>
         <td>
             <a th:href="@{/api/revenue/edit/{id}(id=${revenue.id})}">Редактировать</a> |
             <a th:href="@{/api/revenue/delete/{id}(id=${revenue.id})}" onclick="return confirm('Вы уверены?');">Удалить</a>

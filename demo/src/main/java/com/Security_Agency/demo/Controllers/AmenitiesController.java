@@ -5,6 +5,7 @@ import com.Security_Agency.demo.Repo.SerRepo;
 import com.Security_Agency.demo.SecuredObjects;
 import com.Security_Agency.demo.Service.AmenitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,9 +36,15 @@ public class AmenitiesController {
         }
 
 
+
         @GetMapping("/{id}")
-        public Optional<Amenities> getAmenityById(@PathVariable Long id) {
-                return amenitiesService.getAmenityById(id);
+        public ResponseEntity<Amenities> getServiceById(@PathVariable Long id) {
+                Amenities service = amenitiesService.getAmenitiesById(id);
+                if (service != null) {
+                        return ResponseEntity.ok(service);
+                } else {
+                        return ResponseEntity.notFound().build();
+                }
         }
 
 
@@ -53,6 +60,13 @@ public class AmenitiesController {
                 amenitiesService.deleteAmenity(id);
                 return "redirect:/services";
         }
+
+        /*@GetMapping("/services/delete/{id}")
+        public String deleteAmenity(@PathVariable("id") Long id) {
+                amenitiesService.deleteService(id); // Используем сервис для удаления услуги
+                return "redirect:/services"; // Перенаправляем на список услуг
+        }*/
+
 
         /*@DeleteMapping("/{id}")
         public void deleteAmenity(@PathVariable Long id) {

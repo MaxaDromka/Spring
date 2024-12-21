@@ -1,8 +1,9 @@
 package com.Security_Agency.demo;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name = "secured_objects")
 public class SecuredObjects {
@@ -15,14 +16,14 @@ public class SecuredObjects {
     @Column(name = "object_address", nullable = false)
     private String objectAddress;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_name_id")
     private Client clientName;
 
 
-    @ManyToOne
+    /*@ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "service_type_id")
-    private Amenities serviceType;
+    private Amenities serviceType;*/
 
     @ManyToOne
     @JoinColumn(name = "emp_position_id")
@@ -34,14 +35,6 @@ public class SecuredObjects {
 
     public void setEmployees(Employees employees) {
         this.employees = employees;
-    }
-
-    public Amenities getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(Amenities serviceType) {
-        this.serviceType = serviceType;
     }
 
     public SecuredObjects() {
@@ -69,12 +62,4 @@ public class SecuredObjects {
         this.objectAddress = objectAddress;
     }
 
-
-    public Client getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(Client clientName) {
-        this.clientName = clientName;
-    }
 }

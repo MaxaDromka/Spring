@@ -84,7 +84,6 @@
         <input type="text" class="form-control" id="contractSerialNumber" name="contractSerialNumber" required>
     </div>
 
-    <!-- Поле для выбора услуги -->
     <div class="form-group">
         <label for="serviceType">Тип услуги</label>
         <select class="form-control" id="serviceType" name="amenities.id" required>
@@ -94,26 +93,8 @@
         </select>
     </div>
 
-    <!-- Поле для вывода цены услуги -->
-    <div class="form-group">
-        <label for="servicePrice">Цена услуги:</label>
-        <input type="text" class="form-control" id="servicePrice" name="servicePrice" disabled>
-    </div>
-
     <button type="submit" class="btn btn-primary">Создать контракт</button>
 </form>
-
-<script>
-    document.getElementById('serviceType').addEventListener('change', function() {
-        var selectedServiceId = this.value;
-        fetch('/api/services/' + selectedServiceId)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('servicePrice').value = data.servicePrice;
-            })
-            .catch(error => console.error('Ошибка:', error));
-    });
-</script>
 
 <h2>Контракты</h2>
 <table class="table">

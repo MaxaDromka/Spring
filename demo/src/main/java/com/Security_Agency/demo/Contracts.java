@@ -31,7 +31,7 @@ public class Contracts {
    /* @OneToMany(mappedBy = "revenues", cascade = CascadeType.ALL)
     private List<Revenue> revenues;*/
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "service_type_id")
     private Amenities amenities;
 
